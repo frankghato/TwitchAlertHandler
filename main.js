@@ -1,4 +1,4 @@
-const socketToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbiI6IjYwRTUwQUY0OUU5NUY2RDc3NENGIiwicmVhZF9vbmx5Ijp0cnVlLCJwcmV2ZW50X21hc3RlciI6dHJ1ZSwidHdpdGNoX2lkIjoiNjY5NTczODUifQ.a4QcqKsuzfpYWdpGHbONPt_th2YExf6RXHtDfcm5N7Y'; 
+const socketToken = 'insert api token here'; 
 const streamlabs = io(`https://sockets.streamlabs.com?token=${socketToken}`, {transports: ['websocket']});
 
   var start = new Date().getTime();
