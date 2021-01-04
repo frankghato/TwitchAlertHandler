@@ -1,0 +1,44 @@
+1.  Drag the Twitch Notifications Folder onto your desktop.
+2.  Download notepad++ from https://notepad-plus-plus.org/downloads/ 
+    Click whatever version is at the top, and then click the green download button and run the installer.
+3.  Put all of the gifs that you are going to use in the gifs folder. 
+4.  Right click main.html and click Edit with Notepad++.
+5.  In line 6, change "gifs/sparkling.gif" to the name of the default gif. 
+    For example, if the gif of vulpix just sitting there is called "x", line 6 should say: <img src= "gifs/x.gif" id="defaultGif">
+6.  Save the file.
+7.  Go to streamlabs.com, go to your dashboard, and at the left side on the bottom under Account click on Settings.
+8.  Click on API Settings.
+9.  Click on API Tokens.
+10. Click copy on the bar that says "Your Socket API Token".
+11. Right click on main.js and click Edit With Notepad++.
+12. In line 1, paste your API Token between the ''. 
+    For example, if your API Token was asdjhaskdhsajk, it should say: const socketToken = 'asdjhaskdhsajk';
+13. In lines 4-10, change each "gifs/name.gif" to the names of your gif to the coressponding alert type.
+    If the name of your follow gif is "x" change line 4 to var followGif = "gifs/x.gif";
+    If the name of your sub gif is "y" change line 5 to var subGif = "gifs/y.gif";
+    And so on.
+14. For lines 12-17, change each number to the length of that specific gif in milliseconds.
+    1 second = 1000 milliseconds.    
+    If your follow gif is 3 seconds long, line 12 should say: var followGifLength = 3000;
+    If your sub gif is 5 seconds long, line 13 should say: var subGifLength = 5000;
+    And so on. 
+15. Save the file. 
+16. In OBS, drag the main.html file into the window and it should add it as a source.
+    If it doesn't let you do this, you can click the plus sign, add a new browser source, and for the url put the location of the main.html file.
+    To get the location of the main.html file, you can open it in Google Chrome and the location will be in the address bar. 
+    It should be something like file:///C:/Users/Frank/Desktop/Twitch%20Notifications/main.html
+    Once that's done, you can close the tab in Google Chrome, it does not need to be open.
+17. To color key out the background, right click on the source and click filters.
+18. Under effect filters click the plus button and click color key. 
+    You can name the filter whatever you want or just keep the default name.
+19. Next to Key Color Type, select Custom Color.
+20. Click select color, and in the bottom right in the box next to HTML:, put 56ff00.
+
+I included a png of a heart in the folder. It doesn't do anything. I just put it there to show this was done out of love. 
+
+If in the future you ever want to change one of the gifs:
+Go to the line that relates to the alert type, and change the name like in Step 13.
+Then change the length of the gif like in Step 14.
+Then all you have to do is delete the source from OBS, and go through Steps 16-20 in order to update it.
+
+I tried to be as detailed as possible. Let me know if you have any questions, or just call me and I will walk you through setting it up.
