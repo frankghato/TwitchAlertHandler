@@ -6,8 +6,8 @@ const streamlabs = io(`https://sockets.streamlabs.com?token=${socketToken}`, {tr
   //paths to gifs
   var defaultGif = "gifs/idle.gif";
   var actionGif = "gifs/action.gif";
-  var halfAlertActionGif; "gifs/half_alert_action.gif";
-  var fullAlertActionGif = "gifs/full_art_action.gif";
+  var halfAlertActionGif = "gifs/half_alert_action.gif";
+  var fullAlertActionGif = "gifs/full_alert_action.gif";
   var goalGif = "gifs/goal_idle.gif";
   var firstEvolutionGif = "gifs/first_evolution.gif";
   var halfGoalGif = "gifs/half_goal.gif";
@@ -37,7 +37,7 @@ const streamlabs = io(`https://sockets.streamlabs.com?token=${socketToken}`, {tr
   var totalSubs = 0;
   var subGoal = 20;
   var totalAlerts = 0;
-  var alertGoal = 10;
+  var alertGoal = 40;
   var totalDonations = 0;
   var donationGoal = 100;
 
@@ -210,7 +210,8 @@ const streamlabs = io(`https://sockets.streamlabs.com?token=${socketToken}`, {tr
 
   window.addEventListener("load", function()
   {
-    var date = new Date().getDate();
+    //var date = new Date().getDate();
+    var date = 1;
     if(date === 1)
     {
       localStorage.setItem("subs", 0);
@@ -312,11 +313,11 @@ const streamlabs = io(`https://sockets.streamlabs.com?token=${socketToken}`, {tr
                 stopTheParty();
             }, 17000);
           }
-          //if(!(subObj[0].isTest))
-          //{
+          if(!(subObj[0].isTest))
+          {
             totalSubs++;
             totalAlerts++;
-          //}
+          }
           subEvolution();
           if(flag)
           {
