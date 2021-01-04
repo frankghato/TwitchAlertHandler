@@ -207,11 +207,11 @@ const streamlabs = io(`https://sockets.streamlabs.com?token=${socketToken}`, {tr
       alertIsNotFull = false;
     }
   }
-
+  //when the file loads, load in stored variables
   window.addEventListener("load", function()
   {
-    //var date = new Date().getDate();
-    var date = 1;
+    //automatically resets to zero on the first of every month
+    var date = new Date().getDate();
     if(date === 1)
     {
       localStorage.setItem("subs", 0);
@@ -223,7 +223,7 @@ const streamlabs = io(`https://sockets.streamlabs.com?token=${socketToken}`, {tr
     totalAlerts = parseInt(localStorage.getItem("alerts"));
     setEvolutions();
   })
-
+  //when the file unloads, store variables
   window.addEventListener("unload", function()
   {
     localStorage.setItem('subs', totalSubs);
