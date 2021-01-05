@@ -92,18 +92,6 @@ const streamlabs = io(`https://sockets.streamlabs.com?token=${socketToken}`, {tr
     }
   }
   
-  function playpartyAllTheTime()
-  {
-    var giftedImage = document.getElementById('giftedGif');
-    giftedImage.src = "gifs/animated.png";
-  }
-
-  function stopTheParty()
-  {
-    var giftedImage = document.getElementById('giftedGif');
-    giftedImage.src = "gifs/black.png";
-  }
-  
   //this function handles the evolution of the donation goal
   //if the total amout of donations is half or more of the overal donation goal, it evolves to stage 2
   //if the total amount of donations is greater than or equal to the donation goal, it evolves to stage 3
@@ -320,15 +308,6 @@ const streamlabs = io(`https://sockets.streamlabs.com?token=${socketToken}`, {tr
           //code to handle subscription events
           console.log(eventData.message);
           var subObj = eventData.message;
-          var subVariation = subObj[0].variation;
-          if(subVariation === 0)
-          {
-            playpartyAllTheTime();
-            setTimeout(function() 
-            {
-                stopTheParty();
-            }, 17000);
-          }
           if(!(subObj[0].isTest))
           {
             totalSubs++;
