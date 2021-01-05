@@ -4,17 +4,24 @@
         p 
         {
             font-size: 60px;
+            font-family: 'Impact',fantasy;
+            -webkit-text-stroke: #444444;
+            position: absolute;
+            top: 750px;
         }
     </style>
-    <body>
+    <body onload="setEvolution();">
         <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js' type='text/javascript'></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src= "main.js"></script>
-        <img src= "gifs/idle.gif" id="defaultGif">
+        <img src= "gifs/idle.gif" id="defaultGif" width=1200>
         <br>
         <br>
-        <img src = "gifs/goal_idle.gif" id="goalGif">
         <br>
         <br>
-        <img src = "gifs/sub_goal_idle.gif" id="subGoalGif">
+        <p id="nameText" style="color:#444444">.</p>
+        <br>
+        <br>
+        <br>
     </body>
 </html>
