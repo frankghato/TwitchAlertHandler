@@ -13,3 +13,7 @@ If you'd like to use this code yourself:
 - Add your API token in main.js. (ex. if your API token was "x", line 1 should read: const socketToken = 'x';)
 - Edit the variables with the paths to your images and length of your animations in main.js. (ex. if your default gif is named "x", change the "defaultGif" variable to "gifs/x.gif", and if your default gif is 2 seconds long, change the "defaultGifLength" variable to 2000.)
 
+# Notes
+- Unlike the master branch, this branch specifically DOES feature functionality to display the usernames of followers.
+  This was added to allow the user to display usernames of those that follow in one place, while still using StreamLabs to display the users of all other alerts in a separate       place.
+  This was added because there is no way (that I am aware of) to do this within StreamLabs's alertbox itself.
