@@ -22,6 +22,5 @@ If you'd like to use this code yourself:
   For convenience (and testing purposes) there is a comment line in the onload function that sets the date variable to 1.
   To reset the goal on a date other than the specified date, simply un-comment that line and set the variable equal to that date, and unload and reload the file.
   After this, re-comment the line and unload and reload the file again.
-- Rather than one of the Pokemon reacting to every alert, it is possible to make each Pokemon react to their specific type of alert. I may add functionality for this in the     
-  future.
+- Rather than one of the Pokemon reacting to every alert, it is possible to make each Pokemon react to their specific type of alert. I may add functionality for this in the future.
 - Currently there is no functionality for the usernames of each alert, but I may add it in the future.
