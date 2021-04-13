@@ -16,3 +16,11 @@ If you'd like to use this code yourself:
 - Edit the counting variables to what your desired goals are in main.js. (ex. if your monthly sub goal is 50, change the variable "subGoal" to 50.)
 - If you would prefer to have goals reset weekly rather than monthly, inside the onload event listener simply change "new Date().getDate()" to "new Date.getDay()" and change the condition to whichever day of the week you'd like it to reset. (Sunday = 0, Monday = 1, and so on.)
 - If you would prefer to have goals reset daily, just delete both the onload and onunload event listeners.
+
+# Notes
+- For the goals to properly reset on the specified day, the file needs to be unloaded and loaded on that day.
+  For convenience (and testing purposes) there is a comment line in the onload function that sets the date variable to 1.
+  To reset the goal on a date other than the specified date, simply un-comment that line and set the variable equal to that date, and unload and reload the file.
+  After this, re-comment the line and unload and reload the file again.
+- Rather than one of the Pokemon reacting to every alert, it is possible to make each Pokemon react to their specific type of alert. I may add functionality for this in the     
+  future.
