@@ -49,7 +49,7 @@ const streamlabs = io(`https://sockets.streamlabs.com?token=${socketToken}`, {tr
   var subIsNotFull = true;
   var alertIsNotHalf = true;
   var alertIsNotFull = true;
-  
+
   //checks for the current evolution stage and sets the proper alert response gif
   function changeWithAlert()
   {
@@ -70,9 +70,9 @@ const streamlabs = io(`https://sockets.streamlabs.com?token=${socketToken}`, {tr
       displayImage.src = actionGif;
     }
   }
-  
+
   //checks for the current evolution stage and sets the proper idle gif
-  async function changeToDefault()
+  function changeToDefault()
   {
     var displayImage = document.getElementById('defaultGif');
     if(!(alertIsNotHalf))
@@ -91,10 +91,23 @@ const streamlabs = io(`https://sockets.streamlabs.com?token=${socketToken}`, {tr
       displayImage.src = defaultGif;
     }
   }
-  
+
+  //plays a special gif when a sub is gifted
+  function partyTime()
+  {
+    var giftedImage = document.getElementById('giftedGif');
+    giftedImage.src = "gifs/animated.png";
+    setTimeout(function() 
+    {
+      giftedImage.src = "gifs/black.png";
+    }, 17000);
+  }
+
   //this function handles the evolution of the donation goal
   //if the total amout of donations is half or more of the overal donation goal, it evolves to stage 2
+  //and updates the respective boolean so that the evolution gif does not play again
   //if the total amount of donations is greater than or equal to the donation goal, it evolves to stage 3
+  //and updates the respective boolean so that the evolution gif does not play again
   function donationEvolution()
   {
     var donationGoalImage = document.getElementById('goalGif');
@@ -117,10 +130,12 @@ const streamlabs = io(`https://sockets.streamlabs.com?token=${socketToken}`, {tr
       isNotFull = false;
     }
   }
-  
+
   //this function handles the evolution of the sub goal
   //if the total amout of subscriptions is half or more of the overal sub goal, it evolves to stage 2
+  //and updates the respective boolean so that the evolution gif does not play again
   //if the total amount of subscriptions is greater than or equal to the sub goal, it evolves to stage 3
+  //and updates the respective boolean so that the evolution gif does not play again
   function subEvolution()
   {
     var subGoalImage = document.getElementById('subGoalGif');
@@ -146,7 +161,9 @@ const streamlabs = io(`https://sockets.streamlabs.com?token=${socketToken}`, {tr
 
   //this function handles the evolution of the alert goal
   //if the total amout of alerts is half or more of the overal alert goal, it evolves to stage 2
+  //and updates the respective boolean so that the evolution gif does not play again
   //if the total amount of alerts is greater than or equal to the alert goal, it evolves to stage 3
+  //and updates the respective boolean so that the evolution gif does not play again
   function alertEvolution()
   {
     var alertImage = document.getElementById('defaultGif');
@@ -169,8 +186,8 @@ const streamlabs = io(`https://sockets.streamlabs.com?token=${socketToken}`, {tr
       alertIsNotFull = false;
     }
   }
-  
-  //this function function sets each goal to the proper stage for the current total amounts
+
+  //this function checks the progress on each goal and sets them to the proper stage for the current total amounts
   function setEvolutions()
   {
     var donationGoalImage = document.getElementById('goalGif');
@@ -180,39 +197,39 @@ const streamlabs = io(`https://sockets.streamlabs.com?token=${socketToken}`, {tr
     {
       donationGoalImage.src = halfGoalGif;
       isNotHalf = false;
-    }
-    if(totalDonations >= donationGoal)
-    {
-      donationGoalImage.src = fullGoalGif;
-      isNotFull = false;
+      if(totalDonations >= donationGoal)
+      {
+        donationGoalImage.src = fullGoalGif;
+        isNotFull = false;
+      }
     }
     if(totalSubs >= (subGoal / 2))
     {
       subGoalImage.src = halfSubGoalGif;
       subIsNotHalf = false;
-    }
-    if(totalDonations >= donationGoal)
-    {
-      subGoalImage.src = fullSubGoalGif;
-      subIsNotFull = false;
+      if(totalSubs >= subGoal)
+      {
+        subGoalImage.src = fullSubGoalGif;
+        subIsNotFull = false;
+      }
     }
     if(totalAlerts >= (alertGoal / 2))
     {
       alertImage.src = halfAlertGoalGif;
-      alertIsNotHalf = false;        
+      alertIsNotHalf = false;
+      if(totalAlerts >= alertGoal)
+      {
+        alertImage.src = fullAlertGoalGif;
+        alertIsNotFull = false;
+      }        
     }  
-    if(totalAlerts >= alertGoal)
-    {
-      alertImage.src = fullAlertGoalGif;
-      alertIsNotFull = false;
-    }
   }
-  
-  //when the file loads, load in stored variables and update each goal
+
+  //when the file loads, the stored variables for the goal amounts are loaded in, and the setEvolutions function is called
   window.addEventListener("load", function()
   {
-    //automatically resets to zero on the first of every month
     var date = new Date().getDate();
+    //var date = 1;
     if(date === 1)
     {
       localStorage.setItem("subs", 0);
@@ -224,33 +241,35 @@ const streamlabs = io(`https://sockets.streamlabs.com?token=${socketToken}`, {tr
     totalAlerts = parseInt(localStorage.getItem("alerts"));
     setEvolutions();
   })
-  
-  //when the file unloads, store variables
+
+  //when the file unloads, the variables for the goal amounts are stored
   window.addEventListener("unload", function()
   {
     localStorage.setItem('subs', totalSubs);
     localStorage.setItem('donations', totalDonations);
     localStorage.setItem('alerts', totalAlerts);
   })
-  
+
   //this block of code handles each type of alert
+  //it keeps track of donation amounts and subscriptions in their own variables
+  //it keeps track of every other alert type in one variable
+  //when a goal is met, it updates the gif
   streamlabs.on('event', (eventData) => 
   {
+    
     var start = new Date();
+
     if(eventData.for === 'streamlabs' && eventData.type === 'donation')
     {
-      //code to handle donation events
       console.log(eventData.message);
       var donationObj = eventData.message;
-      var donationAmount = donationObj[0].amount;
+      var donationAmount = parseFloat(donationObj[0].amount);
       if(!(donationObj[0].isTest))
       {
         totalDonations += donationAmount;
         totalAlerts++;
       }
-      donationEvolution();
-      //the flag allows an animated to be played uninterrupted
-      //without it, if events were triggered rapidly the animtion would restart at the moment each alert was received 
+      donationEvolution();    
       if(flag)
           {
             setTimeout(function()
@@ -308,6 +327,11 @@ const streamlabs = io(`https://sockets.streamlabs.com?token=${socketToken}`, {tr
           //code to handle subscription events
           console.log(eventData.message);
           var subObj = eventData.message;
+          var subVariation = subObj[0].variation;
+          if(subVariation === 0 || subObj[0].gifter_display_name != null)
+          {
+            partyTime();
+          }
           if(!(subObj[0].isTest))
           {
             totalSubs++;
