@@ -2,8 +2,7 @@ const socketToken = 'insert api token here';
 const streamlabs = io(`https://sockets.streamlabs.com?token=${socketToken}`, {transports: ['websocket']});
 
   var start = new Date().getTime();
-  
-  //paths to gifs
+   //paths to gifs
   var defaultGif = "gifs/idle.gif";
   var actionGif = "gifs/action.gif";
   var halfAlertActionGif = "gifs/half_alert_action.gif";
