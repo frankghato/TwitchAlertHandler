@@ -24,3 +24,4 @@ If you'd like to use this code yourself:
   After this, re-comment the line and unload and reload the file again.
 - Rather than one of the Pokemon reacting to every alert, it is possible to make each Pokemon react to their specific type of alert. I may add functionality for this in the     
   future.
+- Currently there is no functionality for the usernames of each alert, but I may add it in the future.
